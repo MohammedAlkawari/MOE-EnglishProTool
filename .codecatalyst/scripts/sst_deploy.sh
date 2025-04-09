@@ -11,7 +11,7 @@ if [ -f ./.env ]; then
   npm audit fix
   echo aws://$AWS_ACCOUNT_ID/us-east-1
   npx cdk bootstrap aws://$AWS_ACCOUNT_ID/us-east-1 --force \
-    --cloudformation-execution-policies arn:aws:iam::$AWS_ACCOUNT_ID:policy/Cdk_Least \
+    --cloudformation-execution-policies arn:aws:iam::$AWS_ACCOUNT_ID:policy/GovCICDDeployPolicy \
     --no-public-access-block-configuration
   npx sst deploy --stage prod
 else

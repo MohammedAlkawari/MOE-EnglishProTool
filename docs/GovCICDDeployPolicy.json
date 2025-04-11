@@ -1,0 +1,189 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CloudFormationPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:DescribeStackEvents",
+                "cloudformation:DeleteStack",
+                "cloudformation:CreateChangeSet",
+                "cloudformation:DescribeChangeSet",
+                "cloudformation:ExecuteChangeSet",
+                "cloudformation:DescribeStacks",
+                "cloudformation:DeleteChangeSet",
+                "cloudformation:DescribeStackResources",
+                "cloudformation:GetTemplate"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "OpenSearchServerlessFullPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "aoss:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "SNSPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "sns:GetTopicAttributes",
+                "sns:CreateTopic",
+                "sns:TagResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CloudWatchLogsFullPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "logs:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CognitoFullPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "cognito-idp:*",
+                "cognito-identity:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "APIGatewayFullPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "apigateway:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CloudFrontFullPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "IAMPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole",
+                "iam:UntagRole",
+                "iam:GetPolicy",
+                "iam:PassRole",
+                "iam:TagRole",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:AttachRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:TagPolicy",
+                "iam:DetachRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:UntagPolicy",
+                "iam:UpdateRole",
+                "sts:AssumeRole",
+                "iam:GetRolePolicy",
+                "iam:CreateServiceLinkedRole",
+                "iam:CreatePolicy",
+                "iam:ListPolicyVersions",
+                "iam:DeletePolicy"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "S3Permissions",
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:DeleteBucket",
+                "s3:DeleteBucketPolicy",
+                "s3:GetBucketPolicy",
+                "s3:PutBucketPolicy",
+                "s3:PutBucketTagging",
+                "s3:GetObject",
+                "s3:PutBucketVersioning",
+                "s3:PutEncryptionConfiguration",
+                "s3:PutBucketPublicAccessBlock",
+                "s3:PutBucketOwnershipControls",
+                "s3:PutBucketCORS",
+                "s3:PutLifecycleConfiguration"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "SSMPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "ECRPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:DeleteRepository",
+                "ecr:DescribeRepositories",
+                "ecr:PutLifecyclePolicy",
+                "ecr:SetRepositoryPolicy",
+                "ecr:CreateRepository"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "LambdaPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "EventBridgePermissions",
+            "Effect": "Allow",
+            "Action": [
+                "events:PutRule",
+                "events:DeleteRule",
+                "events:DescribeRule",
+                "events:EnableRule",
+                "events:DisableRule",
+                "events:ListRules",
+                "events:ListTargetsByRule",
+                "events:PutTargets",
+                "events:RemoveTargets",
+                "events:TagResource",
+                "events:UntagResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "DynamoDBPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:DescribeTable",
+                "dynamodb:CreateTable",
+                "dynamodb:DeleteTable",
+                "dynamodb:UpdateTable",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:PutItem",
+                "dynamodb:GetItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ListTables",
+                "dynamodb:TagResource",
+                "dynamodb:UpdateContinuousBackups",
+                "dynamodb:DescribeContinuousBackups",
+                "dynamodb:UntagResource"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

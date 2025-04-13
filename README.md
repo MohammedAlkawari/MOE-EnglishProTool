@@ -1,258 +1,115 @@
-# Sample React.js SST app
+# English Proficiency Tool - IELTS Exam Training Website
 
-An example full-stack serverless React.js app created with SST.
+This repository contains the codebase for **LINGUI**, a web application developed for the **Bahrain Ministry of Education** to help students improve their English proficiency and prepare for the **IELTS (International English Language Testing System)** exam.
 
-This sample also includes Amazon CodeCatalyst and GitHub workflow (CD pipelines) to deploy changes of the main branch to AWS automatically. As well as additional checks that can be enabled to protect the main branch, require PR reviews, require build to pass before merge, perform secrets scanning on the repository and prevent secrets from being pushed to GitHub.
+---
 
-This stack assumes and requires that you deploy the __prod__ SST stage first, which includes a relational database. Other non-prod stages refernce that relational database instead of creating their own. See [DBStack.ts](./stacks/DBStack.ts) for more details. 
+## 🚀 Key Features
 
-The template was designed this way to be __educational and to demonstrate the use of different stages (prod,dev,test) while keeping a single database for cost saving and simplification__ to be shared between them all. It is important to note that this is not a recommended setup for production uses. 
+- **IELTS Exam Simulation**  
+  Users can take simulated IELTS exams to assess and enhance their English proficiency.
 
-## Steps to get started (one time per repo)
+- **Personalized Feedback**  
+  Leveraging Generative AI, users receive detailed performance feedback, highlighting strengths and areas for improvement.
 
-At a high level, these are the steps you need to take to use this template:
+- **Motivational Gamification**  
+  Daily streaks encourage consistent practice. Users can compete on leaderboards by maintaining streaks through daily learning activities.
 
-1. Create a repository out of this template (Click the green button!)
-1. Decide between Amazon CodeCatalyst or GitHub workflows for CI/CD
-    1. Configure the selected workflow
-1. Start developing and testing
+- **Streak Milestone Rewards**  
+  Email notifications are sent when users reach significant streak milestones, boosting motivation.
 
-Checkout the relevant sections below for the detailed steps in each.
+- **Admin Dashboard**  
+  A dedicated interface for admins to manage the platform and its content effectively.
 
-## Decide between Amazon CodeCatalyst or GitHub workflows for CI/CD
+- **Data Visualization**  
+  Visual dashboards provide insights into user performance across Bahrain and per school, along with system performance metrics.
 
-### Amazon CodeCatalyst
-This template includes a sample workflow definition under the speical [.codecatalyst](.codecatalyst) root folder in the following structure.
+- **Exam Upload & Processing**  
+  Admins can upload new IELTS content which is then processed using AI.
 
-```md
-.codecatalyst
-    ├── imagebuilder            (1)
-    │   ├── docker.yaml
-    │   ├── git.yaml
-    │   └── node.yaml
-    ├── scripts                 (2)
-    │   └── sst_deploy.sh
-    └── workflows               (3)
-        └── DeployToProd.yaml
-```
+- **AI-Powered Content Formatting**  
+  Uploaded content is processed via Amazon Textract and Generative AI, converting it into an editable format for review and approval.
 
-(1) contains Amazon EC2 ImageBuilder componenet configuration files that tell ImageBuilder how to install docker, git and nodejs. These files are used as part of the `devops-coca` stage to create a container image that will be used by Amazon CodeCatalyst workflows to build and deploy your SST application.
+---
 
-(2) contains the build script that will run as part of the Amazon CodeCatalyst workflow.
+## 🛠 Technologies Used
 
-(3) contains the workflow (pipeline) defenition of the Amazon CodeCatalyst workflow that will trigger based on pushes/changes to the main branch and deploy those changes to AWS.
+- **Frontend**: React  
+- **Backend**: Node.js, Python  
+- **Database**: DynamoDB  
+- **AI/ML**: Amazon Bedrock (Titan model), Amazon Textract  
+- **Email Service**: Amazon Simple Notification Service (SNS)  
+- **CI/CD**: Amazon CodeCatalyst
 
-In addition, the [ImageBuilderForCodeCatalyst.ts](devops/ImageBuilderForCodeCatalyst.ts) stack provides an automation that deploys the Amazon ImageBuilder container recipe and pipeline, as well as a private Amazon Elastic Container Registry (ECR) that will host the build image.
+---
 
-#### Configuration steps for Amazon CodeCatalyst
+## 🔄 CI/CD Setup
 
-0. Delete the `.github` folder to disable/remove GitHub workflows
+The system uses **Amazon CodeCatalyst** for automated builds and deployments, reducing manual errors and streamlining development.
 
-1. Deploy the "devops-coca" stage
+### Repository Setup
 
-```bash
-npx sst deploy --stage devops-coca
-```
+1. Access the iGA private GitHub repository for the English proficiency tool.
+2. Fork the repository to your GitHub account.
+3. Locate the `.env` file in the root directory and modify it with your AWS configuration (e.g., `AWS_ACCOUNT_ID`).
+4. Save the changes. The repository is now ready for deployment.
 
-This will deploy the imagebuilder pipeline and all the other resources specified in the stack in order to build the base image.
+---
 
-2. Get the name of the Amazon ECR repository
+### CI/CD Pipeline Setup (Amazon CodeCatalyst)
 
-Access the AWS Console and navigate to the Amazon ECR console.
-You will need to find the name of the ECR repository that was just created.
-You can also use Amazon CloudFormation to find the stack and check the resources tab of the stack to find the ECR repository resource name.
+#### 1. Create the Project
+- Create a new project in Amazon CodeCatalyst.
 
-3. Create a new Amazon CodeCatalyst space at [http://codecatalyst.aws](http://codecatalyst.aws) [(docs)](https://docs.aws.amazon.com/codecatalyst/latest/userguide/spaces-create.html)
+#### 2. Link Repository
+- Link your GitHub repository to the CodeCatalyst project as a source repository.
 
-4. Create a deploy environment in Amazon CodeCatalyst and associate the account connection and IAM roles to your deploy environment [(docs)](https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-connect-account-addroles-env.html)
+#### 3. IAM Setup
+- **Policy**: Create a policy using the JSON file located in the `/doc` folder of this repository.  
+  **Policy Name**: `GovCICDDeployPolicy`
+- **Role**: Create an IAM role in your AWS account and attach the `GovCICDDeployPolicy` to it.
 
-5. Install the GitHub repositories extension in Amazon CodeCatalyst [(docs)](https://docs.aws.amazon.com/codecatalyst/latest/userguide/extensions-github-extension-quickstart.html)
+#### 4. Create an Environment
+- Set up deployment environments in CodeCatalyst:
+  - Environment Name (e.g., `Production`, `Staging`)
+  - Environment Type (Prod or Non-Prod)
+  - Assign the default IAM role created above
 
-6. Trigger Amazon EC2 Image Builder to build the container image
+#### 5. Configure Workflow
+Create or modify the YAML workflow in CodeCatalyst with the following:
 
-Visit the Amazon EC2 Image Builder console, find the pipeline, and trigger it to build the image. Wait for the image to be built and pushed to ECR, then take note of the image URL.
+- **Compute Type**: e.g., EC2  
+- **Trigger Configuration**: Automatically deploy on repository changes  
+- **Action Configurations**:
+  - Deployment scripts
+  - Containers (if used)
+  - IAM role
+  - AWS account ID
+  - Deployment stage (Dev, Prod)
 
-7. Update [DeployToProd.yaml](.codecatalyst/workflows/DeployToProd.yaml) with the container image URL from ECR and the deploy environment name and IAM role
+> This setup allows for seamless, secure, and consistent deployment of infrastructure and application code.
 
-This can be done from the CodeCatalyst console or by modifying the yaml file directly.
+---
 
+## ⚙️ Deployment Configurations
 
-Once all of these steps are done, Amazon CodeCatalyst workflow should be able to run successfully and deploy the sample SST application to the configured AWS account.  
+- The system uses **Infrastructure as Code (IaC)** with a minimal config approach.
+- All configurations are centralized in the `.env` file for ease of management.
+- Before deploying, check the **availability of the Gen-AI model** in your AWS region.
 
-### GitHub Workflow
-
-This template includes two sample workflow definitions under the speical [.github](.github) root folder in the following structure.
-
-```md
-.github
-    └── workflows
-        ├── build-test.yaml             (1)
-        └── deploy-on-push-main.yaml    (2)
-```
-
-(1) contains the workflow definition to trigger a build check to confirm that the code can build sucessfully for every pull request. As the PR is reviewed and more commits are added, the ci workflow will rebuild to ensure that the code is stable and safe before allowing a merge.
-
-(2) contains the workflow definition to trigger a deployment to `--stage prod` on any commits/push to the main branch, including direct commits and merges.
-
-Additional checks can also be enabled to protect the main branch, require PR reviews, require build to pass before merge, perform secrets scanning on the repository and prevent secrets from being pushed to GitHub. Details are in the config steps section below.
-
-In addition, the [OIDCForGitHubCI.ts](./stacks/devops/OIDCForGitHubCI.ts) stack provides an automation that deploys the OIDC identity provider that allows GitHub workflows from your repository to access your AWS account for deployment. See [SST - Going to Production](https://docs.sst.dev/going-to-production#stacks-setup) if you would like to understnad more about it.
-
-#### Configuration steps for GitHub Workflow
-
-1. Pre-requisite for using SST
-    - Install AWS CDK NPM package 
-
-    ```bash
-    npm i aws-cdk-lib
-    ```
-    - Ensure that [Docker](https://docs.docker.com/engine/install/) is installed on your machine 
-
-2. Update [OIDCForGitHubCI.ts](./stacks/devops/OIDCForGitHubCI.ts) [line 12](./stacks/devops/OIDCForGitHubCI.ts#L12), and [line 13](./stacks/devops/OIDCForGitHubCI.ts#L13) with your organization/repository and repository name respectively.
-
-2. Deploy the "devops-gh" stage
-
-```bash
-npx sst deploy --stage devops-gh
-```
-
-This will deploy the Open ID Connect (OIDC) identity provider in your account.
-
-3. Update the `role-to-assume:` and `aws-region:` attributes in both workflow yaml files to use the role created by the deployed stack. If you do not change the default values, the role name will be GitHub, and so only the AWS account ID will need to be updated in the yaml definition.
-
-```
-build-test.yaml
-deploy-on-push-main.yaml
-```
-
-4. (Re)Trigger a run of the workflows from the `actions` tab to report status checks of each workflow 
-
-    1. Create a branch and perform some changes
-    2. Create a test/dummy PR to trigger the ci build test workflow.
-
-__This inital run is needed to be able to select the status check as part of the branch protection to prevent PR merges on branches that do not pass the build check (ci).__
-
-5. Enable branch protection, Require Pull Request and Reviews
-
-Go to `Settings`>`Branches`>`Add rule`
-
-- Branch name pattern: main
-- Require a pull request before merging: Checked
-- Require approvals: Checked
-- Dismiss stale pull request approvals when new commits are pushed: Checked
-- Require status checks to pass before merging: Checked
-- Require branches to be up to date before merging: Checked
-    - Search for `Build Check` as a status check and select it. if it is not found try starting a PR to trigger the ci workflow and then try again after the workflow is done running once.
-
-`Save Changes`
-
-6. Enable secret scanning and push protection
-
-Go to `Settings`>`Code security and analysis`>
-
-- Secret scanning: Enable
-- Push protection: Enable
-
-## Start developing and testing
-
-Update the line `name: "codecatalyst-sst-app"` in `sst.config.ts` with the name of your application, this will be prefixed to all resources and the Amazon CloudFormation stacks created.
-
-To install dependencies and run your own development environment of the app.
-
-```
-npm install
-npm run dev
-```
-
-### Understanding the project structure
-
-```md
-codecatalyst-sst-app
-    ├── README.md                                   (1)
-    ├── db.dbml                                     (2)
-    ├── docs                                        (3)
-    │   ├── 01-context.md
-    │   ├── 02-deployment-architecture.md
-    │   ├── 03-api-defenition.md
-    │   ├── 04-db-schema.md
-    │   └── diagrams
-    │       ├── app-dev-lifecycle.drawio
-    │       └── app-dev-lifecycle.drawio.png
-    ├── packages
-    │   ├── core                                    (4)
-    │   ├── db-migrations                           (5)
-    │   │   ├── migrationsV1.mjs
-    │   │   └── migrationsV2.mjs
-    │   ├── frontend                                (6)
-    │   │   ├── README.md
-    │   │   ├── package.json
-    │   │   └── ...
-    │   └── functions                               (7)
-    │       ├── src
-    │       │   ├── lambda.ts
-    │       │   └── sample-python-lambda            (8)
-    │       │       ├── lambda.py
-    │       │       └── requirements.txt
-    │       └── ...
-    ├── sst.config.ts
-    ├── stacks                                      (9)
-    │   ├── ApiStack.ts
-    │   ├── DBStack.ts
-    │   ├── FrontendStack.ts
-    │   └── devops
-    │       ├── ImageBuilderForCodeCatalyst.ts
-    │       └── OIDCForGitHubCI.ts
-    └── ...
-```
-
-1. This README file
-2. A file to represent and store the schema of your projects relational DB, for more info see [DBML](https://dbml.dbdiagram.io/home/#dbdocs)
-3. Hosts markdown documentation of your project, feel free to explore and evolve as needed.
-4. Hosts common typescript code that can be used across many lambda functions
-5. Contains sql-like instructions to execute on the relational DB after deployment
-6. Contains the React.js frontend site, the subfolder are mostly pure react project. You are encouraged to look at the sub README for more info.
-7. Contains the lambda functions code, wheather in typescript or python, can be organized in sub folders per function, etc.
-8. A sample folder for a single python lambda function, this is required for lambda functions as they need to have a requirements.txt file in the same directory as the python code
-9. Contains the application's SST stacks that define all of the infrastructure that needs to be created, also includes the stackes used by the DevOps stages
-
-### Now Go Build!
-
-## Helpful Commands
-
-### `npm run dev`
-
-Starts the SST Live Lambda Development environment.
-
-### `npm run build`
-
-Build your app and synthesize your stacks.
-
-### `npm run deploy [stack]`
-
-Deploy all your stacks to AWS. Or optionally deploy, a specific stack. (You should not need this if you have the pipeline deploying to prod, and you using `npm run dev` for your development work.)
-
-The main caveat where you may need to use `deploy` instead of `dev` is if you want to test your application without the Live Lambda feature (hosting Lambda's in AWS instead of proxying them to your laptop, which is what happens in `npm run dev`. [See this for more info on Live Lambda](https://docs.sst.dev/live-lambda-development#how-it-works).) 
-
-### `npm run remove [stack]`
-
-Remove all your stacks and all of their resources from AWS. Or optionally removes, a specific stack.
-
-## Documentation
-
-Learn more.
-
-- [SST Docs](https://docs.sst.dev/)
-- [sst cli](https://docs.sst.dev/packages/sst)
-- [dbdocs](https://dbdocs.io/docs) (Used to host DB documentation.)
-
-## Application/Feature Development Life Cycle 
-
-The figure below shows the typical application/feature devlopment workflow that you can follow. Exchange CodeCatalyst with GitHub if that is what you are using.
-
-![Feature Dev LifeCylce](./docs/diagrams/app-dev-lifecycle.drawio.png)
-
-## Live Lambda Development  
-
-The figure below shows the an SST features called Live Lambda which allows you to debug and test your Lambda functions locally.
-
-![Live Lambda](./docs/diagrams/run-dev.drawio.png)
+### Important:
+If the model is unavailable in your region:
+- Modify the model ID at  
+  `REPO-ROOT/packages/functions/src/utilities.ts` (line 58)  
+  to match a supported region’s model ID.
+
+---
+
+## 📁 Repository Structure
+
+```plaintext
+├── .env                          # Environment configuration
+├── /packages/functions/         # Lambda functions and backend logic
+├── /frontend/                   # React frontend application
+├── /doc/                        # Documentation including IAM policy JSON
+└── workflow.yaml                # CI/CD pipeline definition

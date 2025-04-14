@@ -65,28 +65,32 @@ The system uses **Amazon CodeCatalyst** for automated builds and deployments, re
 - Link your GitHub repository to the CodeCatalyst project as a source repository.
 
 #### 3. IAM Setup
-- **Policy**: Create a policy using the JSON file located in the `/doc` folder of this repository.  
-  **Policy Name**: `GovCICDDeployPolicy`
-- **Role**: Create an IAM role in your AWS account and attach the `GovCICDDeployPolicy` to it.
 
+- **Policy**: Create a policy using the JSON file located in the `/doc` folder of this repository.  
+  **Policy Name**: `GovCICDDeployPolicy`  
+  > **Note**: In case the policy is not already pushed to your account, follow these steps to create it manually.
+
+- **Role**: Create an IAM role in your AWS account.  
+  **Role Name**: `GovCICDDeployRole`  
+  Attach the `GovCICDDeployPolicy` policy to this role.
 #### 4. Create an Environment
 - Set up deployment environments in CodeCatalyst:
   - Environment Name (e.g., `Production`, `Staging`)
   - Environment Type (Prod or Non-Prod)
   - Assign the default IAM role created above
 
-#### 5. Configure Workflow
-Create or modify the YAML workflow in CodeCatalyst with the following:
-
-- **Compute Type**: e.g., EC2  
-- **Trigger Configuration**: Automatically deploy on repository changes  
-- **Action Configurations**:
-  - Deployment scripts
-  - Containers (if used)
-  - IAM role
-  - AWS account ID
-  - Deployment stage (Dev, Prod)
-
+> #### Configure Workflow  
+> Create or modify the YAML workflow in CodeCatalyst with the following:
+>
+> - **Compute Type**: e.g., EC2  
+> - **Trigger Configuration**: Automatically deploy on repository changes  
+> - **Action Configurations**:
+>   - Deployment scripts  
+>   - Containers (if used)  
+>   - IAM role  
+>   - AWS account ID  
+>   - Deployment stage (Dev, Prod)  
+>
 > This setup allows for seamless, secure, and consistent deployment of infrastructure and application code.
 
 ---

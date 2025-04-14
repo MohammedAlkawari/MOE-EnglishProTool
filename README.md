@@ -108,8 +108,55 @@ If the model is unavailable in your region:
 ## 📁 Repository Structure
 
 ```plaintext
-├── .env                          # Environment configuration
-├── /packages/functions/         # Lambda functions and backend logic
-├── /frontend/                   # React frontend application
-├── /doc/                        # Documentation including IAM policy JSON
-└── workflow.yaml                # CI/CD pipeline definition
+├── QuestionScript                   # Scripts and data files related to handling questions
+│   ├── AdditionalQuestions.json     # Additional question set in JSON format
+│   ├── challengesDynamoFiller.py    # Script to populate DynamoDB with challenge-related data
+│   ├── dynamodbFiller.py            # Script to populate DynamoDB with general data
+│   ├── questions.json               # Main set of questions in JSON format
+│   └── questionsNew.json            # Updated or alternate version of questions
+├── README.md                        # Project overview and instructions
+├── aws                              # AWS-related files and dependencies
+│   ├── README.md                    # AWS setup or usage documentation
+│   ├── THIRD_PARTY_LICENSES         # Licenses for third-party AWS tools or libraries
+│   ├── dist                         # Compiled/built AWS-related files
+│   └── install                      # AWS CLI or SDK installation resources
+├── awscliv2.zip                     # AWS CLI v2 installer
+├── db.dbml                          # Database schema in DBML format (for visual modeling)
+├── docs                             # Project documentation
+│   ├── 01-context.md                # Project background and context
+│   ├── 02-deployment-architecture.md # System and deployment architecture details
+│   ├── 03-api-defenition.md         # API definitions and endpoints
+│   ├── 04-db-schema.md              # Explanation of database schema
+│   ├── 05-frontend-guidelines.md    # Guidelines for frontend development
+│   ├── GovCICDDeployPolicy.json     # CI/CD deployment policy for government environments
+│   └── diagrams                     # Architecture and other visual diagrams
+├── gen-ai-moe-challenge             # Placeholder or directory for the Gen-AI challenge
+├── package-lock.json                # Auto-generated dependency lock file (npm or pnpm)
+├── package.json                     # Node.js project config and dependency list
+├── packages                         # Monorepo packages
+│   ├── core                         # Core/shared utilities or services
+│   ├── db-migrations                # Database migration scripts
+│   ├── frontend                     # Frontend source code
+│   └── functions                    # Backend serverless functions
+├── pnpm-workspace.yaml              # pnpm monorepo workspace configuration
+├── sst.config.ts                    # SST (Serverless Stack Toolkit) config for infra-as-code
+├── stacks                           # Infrastructure as code using SST
+│   ├── ApiStack.ts                  # Defines API Gateway and related resources
+│   ├── AuthStack.ts                 # Auth-related infrastructure (e.g., Cognito)
+│   ├── DBStack.ts                   # Database resources (e.g., DynamoDB)
+│   ├── FrontendStack.ts             # Hosting setup for frontend (e.g., S3/CloudFront)
+│   ├── GrammarToolStack.ts          # Specific infra for a grammar tool feature
+│   ├── StorageStack.ts              # File storage-related infra (e.g., S3 buckets)
+│   └── devops                       # DevOps-related scripts or stack definitions
+├── structure.txt                    # Text representation of project structure (likely this file)
+└── tsconfig.json                    # TypeScript compiler configuration
+
+13 directories, 29 files 
+```
+
+---
+
+## 📬 Contact
+
+For access-related inquiries or technical support, please contact the Technical Team under the Innovation & Advanced Technology Directorate at iGA (Information & eGovernment Authority) via:
+innovation.support@iga.gov.bh

@@ -13,6 +13,8 @@ if [ -f ./.env ]; then
   npx cdk bootstrap aws://$AWS_ACCOUNT_ID/us-east-1 --force \
     --cloudformation-execution-policies arn:aws:iam::$AWS_ACCOUNT_ID:policy/GovCICDDeployPolicy \
     --no-public-access-block-configuration
+  yum groupinstall -y "Development Tools"
+  yum install -y gcc gcc-c++
   npx sst deploy --stage prod
 else
   echo ".env file not found in the current directory"

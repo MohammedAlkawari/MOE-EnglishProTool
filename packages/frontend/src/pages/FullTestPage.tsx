@@ -41,62 +41,71 @@ export const FullTestPage = () => {
   console.log('State', { state, testId });
 
   const { sendJsonMessage, readyState } = useWebSocket(socketUrl, {
-    onOpen: event => console.log('opened', event),
-    onClose: event => console.log('closed', event),
+    onOpen: event => console.log('WebSocket opened successfully', event),
+    onClose: event => console.log('WebSocket closed', event),
+    onError: error => console.error('WebSocket error:', error),
     ////// Handle incoming messages //////
     onMessage: e => {
-      console.log('event', e);
-      const response = JSON.parse(e.data);
-      console.log('message', response);
+      console.log('Incoming WebSocket message:', e);
+      try {
+        const response = JSON.parse(e.data);
+        console.log('Parsed message:', response);
 
-      /* For somw reason mahmood is notifing me when my answers are graded (I
-       * don't care for now!)
-       */
-      if (typeof response === 'string') {
-        console.log({ response });
-
-        setIsloading(false);
-      } else if ('error' in response) {
-        console.log('Recieved error', response.error);
-        if (response.error === 'Section is already submitted') {
-          sendJsonMessage({
-            action: 'fullTestGetQuestion',
-            testId: testId,
-          });
-          console.log('SENT MESSAGE');
-          setIsloading(true);
-        } else if (response.error === 'The test is finished') {
-          // TODO: Do something better
-          navigate('/');
+        /* For some reason if answers are graded, we get notifications */
+        if (typeof response === 'string') {
+          console.log('String response:', response);
+          setIsloading(false);
+        } else if ('error' in response) {
+          console.error('Received error from server:', response.error);
+          toast.error(`Error: ${response.error}`);
+          
+          if (response.error === 'Section is already submitted') {
+            sendJsonMessage({
+              action: 'fullTestGetQuestion',
+              testId: testId,
+            });
+            console.log('Sent getQuestion message after section already submitted');
+            setIsloading(true);
+          } else if (response.error === 'The test is finished') {
+            navigate('/');
+          }
+          setIsloading(false);
+        } else if ('testID' in response) {
+          console.log('Received testID, navigating to test:', response.testID);
+          setState(response);
+          toast.dismiss();
+          setIsloading(false);
+          // Navigate after state is set
+          setTimeout(() => {
+            navigate(`/full-test/${response.testID}`);
+          }, 100);
+        } else if ('data' in response) {
+          console.log('Received data response:', response);
+          setState(response);
+          toast.dismiss();
+          setIsloading(false);
+        } else if ('fullItem' in response) {
+          console.log('Received fullItem (feedback):', response);
+          toast.success('Test completed! Loading feedback...');
+          setCachedFeedback(response, testId as string);
+          setTimeout(() => {
+            navigate(`/feedback/${testId}`);
+          }, 1000);
+        } else {
+          console.warn('Unexpected payload structure:', response);
+          setIsloading(false);
         }
-      } else if ('testID' in response) {
-        setState(response);
-        navigate(`/full-test/${response.testID}`);
-
-        toast.dismiss();
+      } catch (error) {
+        console.error('Error processing WebSocket message:', error);
         setIsloading(false);
-      } else if ('data' in response) {
-        console.log('Recieved data', { response });
-        setState(response);
-
-        toast.dismiss();
-        setIsloading(false);
-      } else if ('fullItem' in response) {
-        console.log('Recieved fullItem', response);
-
-        // setState(response);
-        toast('Recieved Feedback');
-        setTimeout(() => {
-          navigate(`/feedback/${testId}`);
-        }, 1000);
-        setCachedFeedback(response, testId as string);
-      } else {
-        console.log('Unexpected payload');
       }
 
-      // Message timeout
+      // Message timeout fallback
       setTimeout(() => {
-        setIsloading(false);
+        if (isLoading) {
+          console.warn('Message processing timeout, stopping loading state');
+          setIsloading(false);
+        }
       }, 10000);
     },
     shouldReconnect: () => true,
@@ -116,12 +125,19 @@ export const FullTestPage = () => {
       </Layout>
     );
 
-  ////// Start test, Submit and Question pages //////
+    ////// Start test, Submit and Question pages //////
   // Test was not started
   if (!testId) {
     const startTest = () => {
-      sendJsonMessage({ action: 'fullTestStart' });
-      toast.info('Loading your test...');
+      console.log('Starting test...');
+      try {
+        sendJsonMessage({ action: 'fullTestStart' });
+        console.log('WebSocket message sent successfully');
+        toast.info('Loading your test...');
+      } catch (error) {
+        console.error('Error starting test:', error);
+        toast.error('Failed to start test. Please try again.');
+      }
     };
 
     out = (
@@ -207,8 +223,11 @@ export const FullTestPage = () => {
         return JSON.stringify(state);
       } else {
         const time = Number(testId.slice(0, testId.indexOf('-')));
+        // Defensive type check: ensure state.data is an object before using 'in' operator
         const savedAnswers =
-          'answer' in state.data ? state.data.answer?.answer : undefined;
+          typeof state.data === 'object' && state.data !== null && 'answer' in state.data
+            ? state.data.answer?.answer
+            : undefined;
 
         switch (state.type) {
           case 'listening':

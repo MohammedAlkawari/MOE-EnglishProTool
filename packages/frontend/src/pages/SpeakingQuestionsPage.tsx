@@ -93,7 +93,7 @@ export const SpeakingQuestionsPage: React.FC<SpeakingQuestionsPageProps> = ({
     </div>
   );
 
-  const titleRow = <TitleRow title="Speaking Test" onSubmit={() => {}} />;
+  const titleRow = <TitleRow title="Speaking Test" onSubmit={() => submitAnswers(response)} />;
 
   return (
     <>

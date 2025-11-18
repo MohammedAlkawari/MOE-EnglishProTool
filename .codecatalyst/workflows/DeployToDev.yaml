@@ -7,7 +7,7 @@ SchemaVersion: "1.0"
 Triggers:
   - Type: Push
     Branches:
-      - PROD
+      - DEV
 
 # Required - Define action configurations.
 Actions:

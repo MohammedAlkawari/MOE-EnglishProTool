@@ -33,45 +33,37 @@ const ReadingExtractedFilePage: React.FC = (/*{ hideLayout }: UploadListeningPro
           path: "/getExtractReading",
         });
 
-        // Resolve the nested Promise if it exists
-        const resolvedResponse = await response.response;
-        if(resolvedResponse.statusCode >= 500){
-          const statusElement = document.getElementById("status");
-          if(statusElement)
-          statusElement.textContent = `${resolvedResponse.body.message}, Please try again later`
+        // AWS Amplify already returns parsed JSON for successful responses
+        console.log("Full response:", response);
+        
+        // Check if response body is a string (needs parsing) or object
+        let parsedBody = response;
+        if (typeof response === "string") {
+          parsedBody = JSON.parse(response);
         }
-        // Check if body is already an object
-        const parsedBody =
-          typeof resolvedResponse.body === "string"
-            ? JSON.parse(resolvedResponse.body) // Parse if it's a string
-            : resolvedResponse.body; // Use directly if it's an object
 
-        if (parsedBody) {
-          const fileContent = await parsedBody.text();
-          const passage1 = JSON.parse(fileContent).passage1;
-          const passage2 = JSON.parse(fileContent).passage2;
-          const passage3 = JSON.parse(fileContent).passage3;
-          const firstSetQuestions = JSON.parse(fileContent).firstQuestions;
-          const secondSetQuestions = JSON.parse(fileContent).secondQuestions;
-          const thirdSetQuestions = JSON.parse(fileContent).thirdQuestions;
-          setFirstSetQuestions(firstSetQuestions);
-          setSecondSetQuestions(secondSetQuestions);
+        if (parsedBody && parsedBody.passage1) {
+          const { passage1, passage2, passage3, firstQuestions, secondQuestions, thirdQuestions } = parsedBody;
+          
+          setFirstSetQuestions(firstQuestions);
+          setSecondSetQuestions(secondQuestions);
           setThirdSetQuestions(thirdSetQuestions);
-          setPassages([passage1, passage2, passage3,firstSetQuestions,secondSetQuestions,thirdSetQuestions]);
+          setPassages([passage1, passage2, passage3, firstQuestions, secondQuestions, thirdSetQuestions]);
           setFileContent(feedback); // Update state with file content
-          //console.log("The entire returned from Api:" , fileContent)
-          console.log(passage1)
-          console.log(passage2)
-          console.log(passage3)
-          console.log(firstSetQuestions)
-          console.log(secondSetQuestions)
-          console.log(thirdSetQuestions)
+          
+          console.log("passage1:", passage1)
+          console.log("passage2:", passage2)
+          console.log("passage3:", passage3)
+          console.log("firstQuestions:", firstQuestions)
+          console.log("secondQuestions:", secondQuestions)
+          console.log("thirdQuestions:", thirdQuestions)
         } else {
-          setError("Failed to retrieve file content.");
+          setError("Failed to retrieve file content. Please ensure you have uploaded an exam first.");
         }
       } catch (err: any) {
         console.error("Error fetching file:", err);
-        setError("An error occurred while fetching the file.");
+        const errorMessage = err?.response?.body?.details || err?.message || "An error occurred while fetching the file.";
+        setError(`Error: ${errorMessage}`);
       }
     };
     fetchExtractedFile();

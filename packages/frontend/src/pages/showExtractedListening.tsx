@@ -38,25 +38,23 @@ const sectionName = window.location.pathname?.split('/').pop()?.replace('showExt
           path: `/getExtract`,
         });
         
-        // Resolve the nested Promise if it exists
-        const resolvedResponse = await response.response;
-        // Check if body is already an object
-        const parsedBody =
-          typeof resolvedResponse.body === "string"
-            ? JSON.parse(resolvedResponse.body) // Parse if it's a string
-            : resolvedResponse.body; // Use directly if it's an object
+        // AWS Amplify already returns parsed JSON for successful responses
+        let parsedBody = response;
+        if (typeof response === "string") {
+          parsedBody = JSON.parse(response);
+        }
 
         if (parsedBody) {
-          const fileContent = await parsedBody.text();
-          const feedbackResults = JSON.parse(fileContent).feedbackResults;
+          const feedbackResults = parsedBody.feedbackResults || parsedBody;
           setFeedback(feedbackResults);
-          setFileContent(feedback); // Update state with file content
+          setFileContent(feedbackResults);
         } else {
-          setError("Failed to retrieve file content.");
+          setError("Failed to retrieve file content. Please ensure you have uploaded an exam first.");
         }
       } catch (err: any) {
         console.error("Error fetching file:", err);
-        setError("An error occurred while fetching the file.");
+        const errorMessage = err?.response?.body?.details || err?.message || "An error occurred while fetching the file.";
+        setError(`Error: ${errorMessage}`);
       }
       try {
               const audioResponse: any = await get({
@@ -64,18 +62,15 @@ const sectionName = window.location.pathname?.split('/').pop()?.replace('showExt
                 path: `/getAudioFiles?section=${sectionName}`, 
               });
       
-              const actualAudioFiles = await audioResponse.response;
-              const AudioFiles =
-                typeof actualAudioFiles.body === "string"
-                  ? JSON.parse(actualAudioFiles.body)
-                  : actualAudioFiles.body;
+              // AWS Amplify already returns parsed JSON
+              let AudioFiles = audioResponse;
+              if (typeof audioResponse === "string") {
+                AudioFiles = JSON.parse(audioResponse);
+              }
       
-              const txtFiles = await AudioFiles.text();
-              console.log("We got it now right? ", txtFiles);
+              console.log("We got it now right? ", AudioFiles);
       
-              const parsedFiles = JSON.parse(txtFiles);
-      
-              const myAudioFiles = parsedFiles.mp3Files;
+              const myAudioFiles = AudioFiles.mp3Files || AudioFiles;
               setAudioUrls(myAudioFiles);
       
               console.log("Only the files here: ", myAudioFiles);

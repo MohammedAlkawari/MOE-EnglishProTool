@@ -1,0 +1,108 @@
+{
+  "batch_id": "sample-writing-001",
+  "batch_name": "Sample Writing Test 1",
+  "materials": [
+    {
+      "material": {
+        "section": "writing",
+        "test_id": "writing-sample-001",
+        "title": "Writing Test 1 - Task 1 & 2",
+        "description": "Sample writing test with letter and essay tasks",
+        "tasks": [
+          {
+            "task_id": "1",
+            "prompt": "You should spend about 20 minutes on this task.\n\nYou recently stayed at a hotel that you were very happy with. Write a letter to the hotel manager to say thank you and describe what you enjoyed about your stay.\n\nYou do not need to write any addresses.\nBegin your letter as follows:\nDear [Manager's name],\n\nWrite at least 150 words.",
+            "task_type": "letter",
+            "word_count_min": 150,
+            "word_count_recommended": 150,
+            "time_minutes": 20,
+            "band_model_answers": [
+              {
+                "band": "9",
+                "text": "Dear Manager,\n\nI am writing to express my sincere gratitude for the exceptional service and outstanding hospitality I experienced during my recent stay at your hotel from September 15th to 18th.\n\nYour staff demonstrated remarkable professionalism and courtesy throughout my visit. From the moment I arrived, the check-in process was efficient and welcoming. The receptionist provided valuable recommendations for local attractions, which significantly enhanced my experience of the city.\n\nThe accommodation itself was impeccable. My room was spacious, immaculately clean, and thoughtfully appointed with modern amenities. The comfortable bed and high-quality linens ensured restful sleep after long days of exploration.\n\nThe breakfast buffet deserves special mention. The variety and quality of food offerings catered to diverse dietary preferences, and the dining area provided a pleasant atmosphere to start each day.\n\nMoreover, your hotel's convenient location proved invaluable, with easy access to public transportation and major tourist sites.\n\nI would not hesitate to recommend your establishment to friends and colleagues, and I look forward to staying with you again during my next visit to the city.\n\nThank you once again for making my stay truly memorable.\n\nYours sincerely,\nJohn Smith"
+              },
+              {
+                "band": "7",
+                "text": "Dear Manager,\n\nI am writing to thank you for the pleasant experience I had at your hotel recently. I stayed there from September 15 to 18 and really enjoyed my visit.\n\nThe staff were very helpful and friendly. When I arrived, they welcomed me warmly and answered all my questions about the city. This made me feel comfortable immediately.\n\nMy room was clean and comfortable, and I had everything I needed. The bed was comfortable and the bathroom had all necessary facilities. The room also had a nice view of the city, which I really appreciated.\n\nThe breakfast was also excellent. There was a good variety of food, including fresh fruit, cereals, and hot dishes. The dining area was pleasant and quiet.\n\nLastly, the location of the hotel was very convenient. It was close to the train station, so I could easily visit different parts of the city.\n\nOverall, I had a wonderful stay and I would definitely recommend your hotel to my friends.\n\nThank you for your excellent service.\n\nYours sincerely,\nJohn Smith"
+              }
+            ]
+          },
+          {
+            "task_id": "2",
+            "prompt": "You should spend about 40 minutes on this task.\n\nWrite about the following topic:\n\nMany people today are choosing to have their children educated at home rather than sending them to school. Do the advantages of home education outweigh the disadvantages?\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.\n\nWrite at least 250 words.",
+            "task_type": "essay",
+            "word_count_min": 250,
+            "word_count_recommended": 250,
+            "time_minutes": 40,
+            "band_model_answers": [
+              {
+                "band": "8",
+                "text": "Home education has become increasingly popular among families seeking alternatives to traditional schooling. While this approach offers certain advantages, such as personalized learning and flexible scheduling, I believe that the disadvantages, particularly regarding social development and resource constraints, ultimately outweigh the benefits.\n\nHome education undoubtedly provides significant advantages. Firstly, it enables tailored instruction that caters to each child's individual learning pace and style. Parents can focus on their child's specific strengths and weaknesses, potentially leading to improved academic outcomes. Secondly, the flexibility of home education allows families to pursue learning opportunities that might not be available in conventional schools, such as extended travel or specialized subject instruction. Furthermore, home-educated children may experience a safer, more controlled learning environment free from bullying and negative peer influences.\n\nHowever, the disadvantages of home education are substantial and multifaceted. Most significantly, children miss crucial opportunities for social interaction and development. Schools provide a diverse environment where children learn collaboration, conflict resolution, and social skills through daily interaction with peers. These competencies are vital for future success in university and the workplace. Additionally, parents often lack the specialized expertise and qualifications required to teach advanced subjects effectively. This potential knowledge gap may result in inadequate preparation for higher education. Moreover, home-educated children may have limited access to facilities, laboratories, and resources that schools typically provide.\n\nIn conclusion, while home education offers personalized learning opportunities, its limitations regarding social development and educational resources pose significant disadvantages. For most families, traditional schooling remains the superior option, though home education may suit particular circumstances."
+              }
+            ]
+          }
+        ],
+        "rubrics": {
+          "rubrics": [
+            {
+              "criterion": "Task Achievement",
+              "band_descriptors": {
+                "9": "Fully accomplishes all parts of the task; presents a fully developed position in response to the prompt",
+                "8": "Sufficiently addresses all parts of the task; presents a well-developed position, though some aspects may be less fully explored",
+                "7": "Addresses the task adequately; presents a clear position, though some parts may not be fully developed",
+                "6": "Addresses the task; presents a position though some aspects may not be well developed",
+                "5": "Partially addresses the task; a position is presented but may lack clarity or development"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            },
+            {
+              "criterion": "Coherence and Cohesion",
+              "band_descriptors": {
+                "9": "Uses cohesion in such a way that it attracts no attention; skillfully manages paragraphing",
+                "8": "Uses a range of cohesive devices appropriately; manages paragraphing well",
+                "7": "Uses a range of cohesive devices appropriately; paragraphing is generally clear and logical",
+                "6": "Uses some cohesive devices appropriately; paragraphing is clear",
+                "5": "Uses some cohesive devices but they may be overused or underused; paragraphing may lack clarity"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            },
+            {
+              "criterion": "Lexical Resource",
+              "band_descriptors": {
+                "9": "Uses a wide range of vocabulary with skillful use of uncommon items; register is appropriate",
+                "8": "Uses a range of vocabulary with some accuracy and flexibility; register is appropriate",
+                "7": "Uses a range of vocabulary with generally appropriate use and register",
+                "6": "Uses an adequate range of vocabulary; occasionally uses inappropriate vocabulary",
+                "5": "Uses a somewhat limited range of vocabulary; may include inappropriate vocabulary"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            },
+            {
+              "criterion": "Grammatical Accuracy and Range",
+              "band_descriptors": {
+                "9": "Uses a wide range of sentence structures with exceptional accuracy",
+                "8": "Uses a range of sentence structures with generally accurate grammar",
+                "7": "Uses a range of structures; grammatical errors are few and minor",
+                "6": "Uses a mix of simple and complex structures; some grammatical errors occur",
+                "5": "Limited range of structures; grammatical errors are frequent but do not impede communication"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            }
+          ]
+        },
+        "total_points": 9,
+        "duration_seconds": 3600,
+        "source": {
+          "source_name": "Synthetic Example",
+          "license": "public_domain",
+          "notes": "Example writing tasks and rubrics modeled on official IELTS format."
+        },
+        "version": "1.0"
+      }
+    }
+  ]
+}

@@ -46,6 +46,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     // Return the result with CORS headers
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      },
       body: JSON.stringify(result),
     };
   } catch (error) {
@@ -54,7 +60,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     // Return an error message if there's an issue
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Could not fetch aggregates' }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+      body: JSON.stringify({ error: 'Could not fetch aggregates', details: String(error) }),
     };
   }
 };

@@ -1,0 +1,85 @@
+{
+  "batch_id": "sample-reading-001",
+  "batch_name": "Sample Reading Test 1",
+  "materials": [
+    {
+      "material": {
+        "section": "reading",
+        "test_id": "reading-sample-001",
+        "title": "Reading Test 1 - Three Passages",
+        "description": "Sample reading test with 3 passages and 40 questions",
+        "passages": [
+          {
+            "passage_id": "P1",
+            "title": "The Impact of Artificial Intelligence",
+            "text": "Artificial Intelligence (AI) has revolutionized numerous industries over the past decade. From healthcare to finance, transportation to entertainment, AI technologies are reshaping how we live and work.\n\nIn healthcare, machine learning algorithms now assist doctors in diagnosing diseases with greater accuracy than ever before. AI-powered systems can analyze medical imaging data and identify patterns that might indicate early-stage cancers or other conditions. Similarly, in the financial sector, AI algorithms are used for fraud detection and risk assessment, processing vast amounts of transaction data in seconds.\n\nThe transportation industry has seen significant changes with the development of autonomous vehicles. Companies like Tesla and Google are investing billions into self-driving car technology, which promises to reduce accidents caused by human error and improve traffic efficiency.\n\nHowever, the rise of AI also presents challenges. Job displacement is a significant concern as automation takes over tasks previously performed by humans. Additionally, questions of data privacy and algorithmic bias have become increasingly important as AI systems become more prevalent in society.",
+            "word_count": 250
+          },
+          {
+            "passage_id": "P2",
+            "title": "Ocean Acidification and Marine Life",
+            "text": "Ocean acidification, often referred to as 'the other CO2 problem,' is one of the most significant environmental challenges of our time. As atmospheric carbon dioxide levels rise, the ocean absorbs approximately 30% of this CO2, leading to changes in ocean chemistry.\n\nWhen carbon dioxide dissolves in seawater, it forms carbonic acid, which lowers the pH of the ocean. This process, known as ocean acidification, reduces the availability of carbonate ions that many marine organisms need to build their shells and skeletons. Species such as corals, pteropods (sea butterflies), and oysters are particularly vulnerable to these changes.\n\nCoral reefs, sometimes called the 'rainforests of the sea,' are among the most biodiverse ecosystems on Earth. Yet they are experiencing unprecedented stress due to rising ocean temperatures and acidification. Scientists estimate that if current trends continue, most coral reefs could disappear by the end of this century.\n\nThe consequences extend beyond the marine ecosystem. Millions of people depend on seafood as their primary source of protein, and changes in marine ecosystems could have severe implications for food security and human livelihoods worldwide.",
+            "word_count": 245
+          },
+          {
+            "passage_id": "P3",
+            "title": "The Psychology of Decision-Making",
+            "text": "Decision-making is a fundamental cognitive process that affects every aspect of our lives. From choosing what to eat for breakfast to making major life decisions, we constantly evaluate options and select courses of action. However, the process is rarely as rational as we might like to believe.\n\nPsychologists have identified numerous cognitive biases that influence our decisions. Confirmation bias, for example, leads us to seek out information that confirms our existing beliefs while ignoring contradictory evidence. Similarly, the availability heuristic causes us to overestimate the likelihood of events that readily come to mind, often due to media coverage.\n\nAnchor bias demonstrates how the first piece of information we encounter can disproportionately influence our subsequent judgments. In negotiations, for instance, the first offer often sets the tone for the entire discussion, even when both parties have access to the same information.\n\nUnderstanding these biases is crucial in various fields. In business, knowledge of decision-making psychology can improve marketing strategies and negotiations. In public policy, it can lead to better-designed interventions that account for how people actually make decisions rather than how economic theory suggests they should.",
+            "word_count": 267
+          }
+        ],
+        "questions": [
+          {
+            "question_id": "Q1",
+            "question_type": "multiple_choice",
+            "question_text": "According to Passage 1, which industry has NOT been mentioned as being revolutionized by AI?",
+            "options": [
+              {"option_id": "A", "text": "Healthcare"},
+              {"option_id": "B", "text": "Agriculture"},
+              {"option_id": "C", "text": "Finance"},
+              {"option_id": "D", "text": "Transportation"}
+            ],
+            "correct_answer_ids": ["B"]
+          },
+          {
+            "question_id": "Q2",
+            "question_type": "short_answer",
+            "question_text": "What percentage of atmospheric CO2 does the ocean absorb, according to Passage 2?",
+            "correct_answers": ["30%", "30 percent", "approximately 30%"],
+            "max_words": 2
+          },
+          {
+            "question_id": "Q3",
+            "question_type": "sentence_completion",
+            "question_text": "According to Passage 3, the _____________ heuristic causes us to overestimate the likelihood of events that readily come to mind.",
+            "correct_answers": ["availability"],
+            "max_words": 1
+          },
+          {
+            "question_id": "Q4",
+            "question_type": "matching",
+            "question_text": "Match each term to its description (Passage 1):",
+            "items": [
+              {"id": "1", "text": "Machine learning"},
+              {"id": "2", "text": "Autonomous vehicles"},
+              {"id": "3", "text": "Algorithm bias"}
+            ],
+            "matches": {
+              "1": "Assists doctors in diagnosing diseases",
+              "2": "Technology developed by Tesla and Google",
+              "3": "A concern related to AI systems in society"
+            }
+          }
+        ],
+        "total_points": 40,
+        "duration_seconds": 3600,
+        "source": {
+          "source_name": "Synthetic Example",
+          "license": "public_domain",
+          "notes": "Example passages and questions modeled on official IELTS reading format."
+        },
+        "version": "1.0"
+      }
+    }
+  ]
+}

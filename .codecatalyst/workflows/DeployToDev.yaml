@@ -38,4 +38,4 @@ Actions:
       Type: EC2
       Fleet: Linux.x86-64.Large
     Environment:
-      Name: Prod
+      Name: DEV

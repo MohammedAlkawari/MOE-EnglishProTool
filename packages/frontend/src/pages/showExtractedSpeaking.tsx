@@ -36,23 +36,23 @@ const SpeakingExtractedFilePage: React.FC = (/*{ hideLayout }: UploadListeningPr
           path: "/getExtractSpeaking",
         });
 
-        const resolvedResponse = await response.response;
-        const parsedBody =
-          typeof resolvedResponse.body === "string"
-            ? JSON.parse(resolvedResponse.body)
-            : resolvedResponse.body;
+        // AWS Amplify already returns parsed JSON for successful responses
+        let parsedBody = response;
+        if (typeof response === "string") {
+          parsedBody = JSON.parse(response);
+        }
 
         if (parsedBody) {
-          const fileContent = await parsedBody.text();
-          const feedbackResults = JSON.parse(fileContent).objectContent;
+          const feedbackResults = parsedBody.objectContent || parsedBody;
           setFeedback(feedbackResults);
-          setFileContent(feedback); // Update state with file content
+          setFileContent(feedbackResults);
         } else {
-          setError("Failed to retrieve file content.");
+          setError("Failed to retrieve file content. Please ensure you have uploaded an exam first.");
         }
       } catch (err: any) {
         console.error("Error fetching file:", err);
-        setError("An error occurred while fetching the file.");
+        const errorMessage = err?.response?.body?.details || err?.message || "An error occurred while fetching the file.";
+        setError(`Error: ${errorMessage}`);
       }
 
       try {
@@ -61,18 +61,15 @@ const SpeakingExtractedFilePage: React.FC = (/*{ hideLayout }: UploadListeningPr
           path: `/getAudioFiles?section=${sectionName}`, 
         });
 
-        const actualAudioFiles = await audioResponse.response;
-        const AudioFiles =
-          typeof actualAudioFiles.body === "string"
-            ? JSON.parse(actualAudioFiles.body)
-            : actualAudioFiles.body;
+        // AWS Amplify already returns parsed JSON
+        let AudioFiles = audioResponse;
+        if (typeof audioResponse === "string") {
+          AudioFiles = JSON.parse(audioResponse);
+        }
 
-        const txtFiles = await AudioFiles.text();
-        console.log("We got it now right? ", txtFiles);
+        console.log("We got it now right? ", AudioFiles);
 
-        const parsedFiles = JSON.parse(txtFiles);
-
-        const myAudioFiles = parsedFiles.mp3Files;
+        const myAudioFiles = AudioFiles.mp3Files || AudioFiles;
         setAudioUrls(myAudioFiles);
 
         console.log("Only the files here: ", myAudioFiles);

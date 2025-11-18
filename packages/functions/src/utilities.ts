@@ -49,24 +49,29 @@ export async function runModel(prompt: string) {
     },
   };
 
-  // Invoke model
-  const response = await client.send(
-    new InvokeModelCommand({
-      body: JSON.stringify(modelParams),
-      contentType: 'application/json',
-      accept: '*/*',
-      modelId: 'amazon.titan-text-premier-v1:0',
-    }),
-  );
+  try {
+    // Invoke model
+    const response = await client.send(
+      new InvokeModelCommand({
+        body: JSON.stringify(modelParams),
+        contentType: 'application/json',
+        accept: '*/*',
+        modelId: 'amazon.titan-text-premier-v1:0',
+      }),
+    );
 
-  // Parse model output
-  const output = Buffer.from(response.body).toString('utf8');
-  const body = JSON.parse(output);
-  const text = body.results[0].outputText;
+    // Parse model output
+    const output = Buffer.from(response.body).toString('utf8');
+    const body = JSON.parse(output);
+    const text = body.results[0].outputText;
 
-  if (typeof text !== 'string') {
-    throw new Error('Unexpected variable type');
+    if (typeof text !== 'string') {
+      throw new Error('Unexpected variable type: output is not a string');
+    }
+
+    return text;
+  } catch (error) {
+    console.error('Bedrock API Error:', error);
+    throw new Error(`Bedrock API failed: ${String(error)}`);
   }
-
-  return text;
 }

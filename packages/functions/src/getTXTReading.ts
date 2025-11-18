@@ -59,13 +59,16 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     getPassage2 += objectContent
     getPassage3 += objectContent
     
-    
-    const passage1 = await runModel(getPassage1);
-    const passage2 = await runModel(getPassage2);
-    const passage3 = await runModel(getPassage3);
-    const firstQuestions = await runModel(passage1Questions)
-    const secondQuestions = await runModel(passage2Questions)
-    const thirdQuestions = await runModel(passage3Questions)
+    // Make all Bedrock calls in parallel to speed up and reduce timeout risk
+    console.log('Starting parallel Bedrock calls...');
+    const [passage1, passage2, passage3, firstQuestions, secondQuestions, thirdQuestions] = await Promise.all([
+      runModel(getPassage1),
+      runModel(getPassage2),
+      runModel(getPassage3),
+      runModel(passage1Questions),
+      runModel(passage2Questions),
+      runModel(passage3Questions),
+    ]);
 
     console.log('Object Content:', objectContent);
     console.log("First passage:" , passage1)

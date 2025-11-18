@@ -1,0 +1,129 @@
+{
+  "batch_id": "sample-speaking-001",
+  "batch_name": "Sample Speaking Test 1",
+  "materials": [
+    {
+      "material": {
+        "section": "speaking",
+        "test_id": "speaking-sample-001",
+        "title": "Speaking Test 1 - Three Parts",
+        "description": "Sample speaking test with Parts 1, 2, and 3",
+        "parts": [
+          {
+            "part_id": "1",
+            "duration_seconds": 300,
+            "description": "Introduction and interview. The examiner asks questions about familiar topics such as home, family, work, studies, and interests.",
+            "prompts": [
+              "Good morning/afternoon. My name is [name]. What's your name?",
+              "Can you tell me a bit about yourself?",
+              "Do you work or are you a student?",
+              "What do you like to do in your free time?",
+              "Tell me about your family."
+            ],
+            "follow_up_prompts": [
+              "Why do you enjoy that?",
+              "How often do you do that?",
+              "How long have you been doing this?",
+              "Do many people do this in your country?",
+              "Is that a hobby or something you do professionally?"
+            ]
+          },
+          {
+            "part_id": "2",
+            "duration_seconds": 300,
+            "description": "Individual long turn. The candidate is given a task card with a topic and several points to cover. The candidate has 1 minute to prepare and then speaks for 1-2 minutes. The examiner does not ask questions during this part.",
+            "prompts": [
+              "Describe a memorable journey you have taken.\nYou should say:\n- Where you went\n- Who you traveled with\n- What you did there\n- And explain why it was memorable",
+              "Describe a book or film that you enjoyed.\nYou should say:\n- What it was about\n- When you read/watched it\n- Why you liked it\n- And explain what you learned from it"
+            ],
+            "follow_up_prompts": [
+              "Would you go back to that place?",
+              "Do many people visit that place?",
+              "What was the most interesting part?",
+              "Would you recommend this to others?"
+            ]
+          },
+          {
+            "part_id": "3",
+            "duration_seconds": 300,
+            "description": "Discussion. The examiner asks follow-up questions related to the Part 2 topic and related abstract themes. This part involves a more in-depth discussion.",
+            "prompts": [
+              "Do you think travel is important? Why?",
+              "How has travel changed in recent years?",
+              "What are the benefits and drawbacks of travel?",
+              "How do different types of media influence people's choices?",
+              "How important are books and films in modern society?",
+              "How has technology changed the way we consume entertainment?"
+            ],
+            "follow_up_prompts": [
+              "Can you explain that further?",
+              "Do you agree with that viewpoint?",
+              "How might this change in the future?",
+              "What is your opinion on this trend?"
+            ]
+          }
+        ],
+        "rubrics": {
+          "rubrics": [
+            {
+              "criterion": "Fluency and Coherence",
+              "band_descriptors": {
+                "9": "Speaks fluently with only rare repetition or self-correction; any hesitation is content-related rather than language-related; develops topics coherently and appropriately",
+                "8": "Speaks fluently with only occasional repetition or self-correction; hesitation is usually content-related; develops and links ideas well but occasionally lacks focus",
+                "7": "Speaks at length without noticeable effort or loss of coherence; may demonstrate language-related hesitation; links ideas but may not always do so fluently",
+                "6": "Produces longer turns without noticeable effort but may repeat themselves; uses basic connectors but some ideas lack clarity or focus",
+                "5": "Usually maintains flow of speech but uses repetition, self-correction and/or slow speech to keep going; limited use of connectors"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            },
+            {
+              "criterion": "Lexical Resource",
+              "band_descriptors": {
+                "9": "Uses a wide vocabulary range fluently and appropriately; skillfully uses uncommon words and expressions; topic-specific vocabulary is accurate",
+                "8": "Uses a range of vocabulary with some precision; uses paraphrase successfully; some use of topic-specific vocabulary",
+                "7": "Uses a range of vocabulary; topic-specific vocabulary is used accurately; occasional inaccuracy in word choice",
+                "6": "Uses adequate vocabulary for the topics discussed; attempts topic-specific vocabulary but may be imprecise",
+                "5": "Uses vocabulary that is mostly appropriate, though sometimes inaccurate; limited range; repetition of the same words"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            },
+            {
+              "criterion": "Grammatical Accuracy and Range",
+              "band_descriptors": {
+                "9": "Uses a full range of structures naturally and appropriately; produces error-free speech regularly",
+                "8": "Uses a range of complex structures; generally produces error-free speech; occasional errors or inappropriacies",
+                "7": "Uses a range of simple and complex structures; makes only occasional grammatical errors; errors do not reduce communication",
+                "6": "Uses a mix of simple and complex structures; errors are common but do not usually impede communication",
+                "5": "Limited range of structures; makes frequent errors which may impede communication; some important mistakes"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            },
+            {
+              "criterion": "Pronunciation",
+              "band_descriptors": {
+                "9": "Exhibits clear, natural pronunciation; stress and intonation are well-managed; may show slight traces of an accent",
+                "8": "Pronunciation is mostly clear; L1 accent is evident but does not noticeably affect intelligibility; stress and intonation are mostly accurate",
+                "7": "Pronunciation is clearly intelligible; L1 accent is noticeable; intonation is reasonable; some words mispronounced",
+                "6": "Pronunciation is generally intelligible; L1 accent is quite noticeable; some errors in stress and intonation",
+                "5": "Pronunciation is generally intelligible; some errors in pronunciation may occasionally cause misunderstanding; wide range of errors in stress, rhythm, and intonation"
+              },
+              "weight": 0.25,
+              "max_points": 9
+            }
+          ]
+        },
+        "total_points": 9,
+        "duration_seconds": 900,
+        "source": {
+          "source_name": "Synthetic Example",
+          "license": "public_domain",
+          "notes": "Example speaking test structure and prompts modeled on official IELTS format."
+        },
+        "version": "1.0"
+      }
+    }
+  ]
+}

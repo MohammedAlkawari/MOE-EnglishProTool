@@ -101,6 +101,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     // ============================
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      },
       body: JSON.stringify({
         topByOverallAvg,
         topByExamsSolved,
@@ -112,7 +118,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Could not fetch data' }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+      body: JSON.stringify({ error: 'Could not fetch data', details: String(error) }),
     };
   }
 };

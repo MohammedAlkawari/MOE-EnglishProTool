@@ -25,6 +25,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     if (!targetObjectKey) {
       return {
         statusCode: 404,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'GET,OPTIONS',
+        },
         body: JSON.stringify({ message: `No object found for userID: ${userID}` }),
       };
     }
@@ -38,6 +44,12 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     
     return {
         statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'GET,OPTIONS',
+        },
         body: JSON.stringify({
          objectContent
         }),
@@ -46,7 +58,16 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     console.error('Error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: 'Internal server error'}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      },
+      body: JSON.stringify({ 
+        message: 'Internal server error',
+        details: String(error)
+      }),
     };
   }
 };

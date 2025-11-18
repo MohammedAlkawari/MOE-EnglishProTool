@@ -20,6 +20,11 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     if (!table1Response.Items || table1Response.Items.length === 0) {
       return {
         statusCode: 404,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+        },
         body: JSON.stringify({ error: 'No matching records found in Table 1' }, null, 2),
       };
     }
@@ -68,6 +73,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
 
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      },
       body: JSON.stringify({ results: filteredResults }, null, 2),
     };
   } catch (error) {
@@ -75,7 +86,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' }, null, 2),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+      body: JSON.stringify({ error: 'Internal Server Error', details: String(error) }, null, 2),
     };
   }
 };

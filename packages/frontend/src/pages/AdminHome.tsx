@@ -105,8 +105,8 @@ function AdminHome() {
         setAvgSpeakingScore(response.avg_speaking_score);
         setAvgWritingScore(response.avg_writing_score);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Failed to fetch data. Please try again later.');
+        console.error('Error fetching getAggregates:', error);
+        setError('Failed to fetch aggregate data. Please try again later.');
       } finally {
         setLoading(false);
       }

@@ -1,0 +1,76 @@
+{
+  "batch_id": "sample-listening-001",
+  "batch_name": "Sample Listening Test 1",
+  "materials": [
+    {
+      "material": {
+        "section": "listening",
+        "test_id": "listening-sample-001",
+        "title": "Listening Test 1 - Section A",
+        "description": "Sample listening test with 10 questions",
+        "audio": {
+          "s3_key": "exams/listening/listening-sample-001/audio/listening-test-1.mp3",
+          "filename": "listening-test-1.mp3",
+          "duration_seconds": 180,
+          "sample_rate": 44100,
+          "format": "mp3"
+        },
+        "transcript": {
+          "full_text": "Hello, welcome to the listening test. You will hear a conversation between a student advisor and a student. Listen carefully and answer the questions that follow.\n\nAdvisor: Good morning! I'm the academic advisor. I see you're interested in our Business Studies program.\n\nStudent: Yes, I am! I'd like to know more about the course structure.\n\nAdvisor: Of course. The program is divided into four semesters...",
+          "timings": {
+            "0:00-0:10": "Introduction and greeting",
+            "0:10-1:30": "Main conversation"
+          }
+        },
+        "questions": [
+          {
+            "question_id": "Q1",
+            "question_type": "multiple_choice",
+            "question_text": "What is the student interested in?",
+            "options": [
+              {
+                "option_id": "A",
+                "text": "Law Studies program"
+              },
+              {
+                "option_id": "B",
+                "text": "Business Studies program"
+              },
+              {
+                "option_id": "C",
+                "text": "Engineering program"
+              },
+              {
+                "option_id": "D",
+                "text": "Medical Studies program"
+              }
+            ],
+            "correct_answer_ids": ["B"]
+          },
+          {
+            "question_id": "Q2",
+            "question_type": "short_answer",
+            "question_text": "How many semesters does the program have?",
+            "correct_answers": ["four", "4", "Four semesters"],
+            "max_words": 3
+          },
+          {
+            "question_id": "Q3",
+            "question_type": "sentence_completion",
+            "question_text": "The advisor is a ____________ advisor.",
+            "correct_answers": ["academic"],
+            "max_words": 1
+          }
+        ],
+        "total_points": 40,
+        "duration_seconds": 1800,
+        "source": {
+          "source_name": "Synthetic Example",
+          "license": "public_domain",
+          "notes": "This is a realistic example modeled on official IELTS format for demonstration purposes."
+        },
+        "version": "1.0"
+      }
+    }
+  ]
+}

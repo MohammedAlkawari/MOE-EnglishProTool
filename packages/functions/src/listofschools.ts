@@ -34,6 +34,11 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     if (schoolsList.length === 0) {
       return {
         statusCode: 404,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+        },
         body: JSON.stringify({ error: 'No schools found' }),
       };
     }
@@ -41,6 +46,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     // Return the list of unique schools
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      },
       body: JSON.stringify({
         schools: schoolsList,
       }),
@@ -51,7 +62,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     // Return an error message if there's an issue
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Could not fetch schools' }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+      body: JSON.stringify({ error: 'Could not fetch schools', details: String(error) }),
     };
   }
 };

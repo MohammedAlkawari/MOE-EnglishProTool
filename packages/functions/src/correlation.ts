@@ -81,6 +81,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
       // Return the data for all seven graphs
       return {
         statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'GET,OPTIONS',
+        },
         body: JSON.stringify({
           graphData,
         }),
@@ -89,6 +95,11 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
       // Handle case where no records are found
       return {
         statusCode: 404,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+        },
         body: JSON.stringify({ error: 'No records found' }),
       };
     }
@@ -98,7 +109,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     // Return an error message if there's an issue
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Could not fetch records' }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+      body: JSON.stringify({ error: 'Could not fetch records', details: String(error) }),
     };
   }
 };

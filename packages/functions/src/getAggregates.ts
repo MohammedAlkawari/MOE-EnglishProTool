@@ -43,6 +43,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
       // Return the result with the aggregate values in the response body
       return {
         statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'GET,OPTIONS',
+        },
         body: JSON.stringify({
           student_count: studentCount,
           avg_overall_avg: avgOverallAvg,
@@ -56,6 +62,11 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
       // Handle case where no aggregates are found
       return {
         statusCode: 404,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+        },
         body: JSON.stringify({ error: 'Aggregates not found' }),
       };
     }
@@ -65,7 +76,12 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     // Return an error message if there's an issue
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Could not fetch aggregates' }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+      body: JSON.stringify({ error: 'Could not fetch aggregates', details: String(error) }),
     };
   }
 };

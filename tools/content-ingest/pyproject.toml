@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ielts-content-ingest"
+version = "0.1.0"
+description = "IELTS exam material ingestion tool with AWS integration"
+authors = [
+    {name = "MOE EnglishProTool Team", email = "admin@moe.example.com"}
+]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+
+dependencies = [
+    "pydantic>=2.0,<3",
+    "boto3>=1.26,<2",
+    "pyyaml>=6.0,<7",
+    "python-dotenv>=0.21,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1",
+    "mypy>=1.0",
+]
+audio = [
+    "librosa>=0.10",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/MohammedAlkawari/MOE-EnglishProTool"
+"Repository" = "https://github.com/MohammedAlkawari/MOE-EnglishProTool"
+
+[tool.setuptools]
+py-modules = ["ingest", "schema", "validators", "aws_helpers"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+
+[tool.black]
+line-length = 88
+target-version = ["py39", "py310", "py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
